@@ -1,1 +1,1 @@
-export * from './lib/pokemon/pokemon.component';
+export * from "./lib/services/get-pokemon/get-pokemon.service";

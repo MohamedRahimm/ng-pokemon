@@ -1,6 +1,10 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
-import { PokemonColorInfo, PokemonColors, PokemonInfo } from "./pokemon";
+import {
+  PokemonColorInfo,
+  PokemonColors,
+  PokemonInfo,
+} from "@ang-pokemon/shared";
 import {
   catchError,
   filter,
@@ -45,15 +49,17 @@ export class GetPokemonService {
         }),
         filter((response) => response !== null),
         // Gets the pokemon species urls
-        map(({ pokemon_species }) => pokemon_species.map(({ url }) => url)),
-        mergeMap((urls) => {
-          const reqs = urls.map((url) =>
-            this.httpClient.get<PokemonInfo>(url).pipe(
-              catchError((err) => {
-                console.error(err);
-                return of(null);
-              })
-            )
+        map(({ pokemon_species }) => pokemon_species.map(({ name }) => name)),
+        mergeMap((names) => {
+          const reqs = names.map((name) =>
+            this.httpClient
+              .get<PokemonInfo>(`https://pokeapi.co/api/v2/pokemon/${name}`)
+              .pipe(
+                catchError((err) => {
+                  console.error(err);
+                  return of(null);
+                })
+              )
           );
           return forkJoin(reqs).pipe(
             map((responses) =>

@@ -1,0 +1,14 @@
+@for(data of display;track data.pokemon.name){
+<div>
+  <p>{{ data.pokemon.name }}</p>
+  <img [src]="data.pokemon.sprite" alt="idk" />
+</div>
+} @empty {
+<p>loading...</p>
+}
+
+<ul>
+  @for(page of pages; track $index){
+  <lib-page-btn [pageNum]="page" (out)="changePage($event)"></lib-page-btn>
+  }
+</ul>

@@ -1,0 +1,8 @@
+@for(data of colors;track data.pokemon.name){
+<div>
+  <p>{{ data.pokemon.name }}</p>
+  <img [src]="data.pokemon.sprite" alt="idk" />
+</div>
+} @empty {
+<p>loading...</p>
+}

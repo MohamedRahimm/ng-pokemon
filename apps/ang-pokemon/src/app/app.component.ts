@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { PokemonComponent } from '@ang-pokemon/pokemon';
-
+import { Component } from "@angular/core";
+import { RouterModule } from "@angular/router";
+import { colors, PokemonComponent } from "@ang-pokemon/pokemon";
+import { PaginatorComponent } from "@ang-pokemon/paginator";
 @Component({
-    imports: [PokemonComponent, RouterModule],
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.css',
+  imports: [RouterModule, PaginatorComponent],
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrl: "./app.component.css",
 })
 export class AppComponent {
-    title = 'ang-pokemon';
+  totalPages = colors.length;
 }

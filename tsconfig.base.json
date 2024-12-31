@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ang-pokemon/pokemon": ["libs/pokemon/src/index.ts"]
+      "@ang-pokemon/paginator": ["libs/paginator/src/index.ts"],
+      "@ang-pokemon/pokemon": ["libs/pokemon/src/index.ts"],
+      "@ang-pokemon/shared": ["libs/shared/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

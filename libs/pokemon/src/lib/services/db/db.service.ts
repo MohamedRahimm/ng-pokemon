@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { openDB } from "idb";
-import { PokemonColors, PokemonInfo } from "../get-pokemon/pokemon";
-
+import { PokemonColors, PokemonInfo } from "@ang-pokemon/shared";
+import { colors } from "../../pokemon/pokemon.component";
 @Injectable({
   providedIn: "root",
 })
@@ -10,20 +10,7 @@ export class DbService {
     this.initializeDB();
   }
   private dbName = "PokemonDB";
-  private colors: PokemonColors[] = [
-    "red",
-    "black",
-    "blue",
-    "brown",
-    "gray",
-    "green",
-    "pink",
-    "purple",
-    "white",
-    "yellow",
-  ];
   private async initializeDB(): Promise<void> {
-    const colors = this.colors;
     await openDB(this.dbName, 1, {
       upgrade(db) {
         for (const color of colors) {
