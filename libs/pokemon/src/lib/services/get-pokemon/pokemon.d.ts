@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export type PokemonColors = "red" | "blue" | "yellow" | "green" | "black" | "brown" | "purple" | "gray" | "white " | "pink"
+export type PokemonColors = "red" | "blue" | "yellow" | "green" | "black" | "brown" | "purple" | "gray" | "white" | "pink"
 
 export interface PokemonColorInfo {
     id: number

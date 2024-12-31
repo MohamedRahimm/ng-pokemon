@@ -1,35 +1,55 @@
-import { Injectable } from '@angular/core';
-import { openDB } from 'idb';
-import { PokemonColors, PokemonSpecies } from '../get-pokemon/pokemon';
+import { Injectable } from "@angular/core";
+import { openDB } from "idb";
+import { PokemonColors, PokemonInfo } from "../get-pokemon/pokemon";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: "root",
 })
 export class DbService {
-    constructor() {
-        this.initializeDB()
-    }
-    private dbName = "PokemonDB"
-    private storeName = "PokemonColors"
-    private async initializeDB() {
-        await openDB(this.dbName, 1, {
-            upgrade(db) {
-                if (!db.objectStoreNames.contains("PokemonColors")) {
-                    db.createObjectStore('PokemonColors', { keyPath: 'color' });
-                }
-            },
-        });
-    }
-    async getFromIndexedDB(color: PokemonColors): Promise<{ color: PokemonColors, data: PokemonSpecies[] }> {
-        const db = await openDB(this.dbName, 1);
-        const transaction = db.transaction(this.storeName, 'readonly');
-        const store = transaction.objectStore(this.storeName);
-        return store.get(color);
-    }
-    async saveToIndexedDB(color: PokemonColors, data: PokemonSpecies[]): Promise<void> {
-        const db = await openDB(this.dbName, 1);
-        const transaction = db.transaction(this.storeName, 'readwrite');
-        const store = transaction.objectStore(this.storeName);
-        await store.put({ color, data });
-    }
+  constructor() {
+    this.initializeDB();
+  }
+  private dbName = "PokemonDB";
+  private colors: PokemonColors[] = [
+    "red",
+    "black",
+    "blue",
+    "brown",
+    "gray",
+    "green",
+    "pink",
+    "purple",
+    "white",
+    "yellow",
+  ];
+  private async initializeDB(): Promise<void> {
+    const colors = this.colors;
+    await openDB(this.dbName, 1, {
+      upgrade(db) {
+        for (const color of colors) {
+          if (!db.objectStoreNames.contains(color)) {
+            db.createObjectStore(color, { keyPath: "name" });
+          }
+        }
+      },
+    });
+  }
+  async getFromIndexedDB(
+    color: PokemonColors
+  ): Promise<{ color: PokemonColors; data: PokemonInfo[] }> {
+    const db = await openDB(this.dbName, 1);
+    const transaction = db.transaction(color, "readonly");
+    const store = transaction.objectStore(color);
+    const data: PokemonInfo[] = await store.getAll();
+    return { color, data };
+  }
+  async saveToIndexedDB(
+    color: PokemonColors,
+    data: PokemonInfo
+  ): Promise<void> {
+    const db = await openDB(this.dbName, 1);
+    const transaction = db.transaction(color, "readwrite");
+    const store = transaction.objectStore(color);
+    await store.put({ ...data });
+  }
 }
