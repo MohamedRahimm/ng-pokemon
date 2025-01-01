@@ -24,10 +24,16 @@ import { DbService } from "../db/db.service";
 export class GetPokemonService {
   private httpClient = inject(HttpClient);
   private db = inject(DbService);
+  getPokemon(
+    color: PokemonColors,
+    name: string
+  ): Observable<{ data: PokemonInfo }> {
+    return from(this.db.getPokemonFromIndexedDB(color, name));
+  }
   getPokemonByColor(
     color: PokemonColors
   ): Observable<{ color: PokemonColors; data: PokemonInfo[] }> {
-    return from(this.db.getFromIndexedDB(color)).pipe(
+    return from(this.db.getAllFromIndexedDB(color)).pipe(
       switchMap((cachedData) => {
         if (cachedData.data.length) {
           return of(cachedData);

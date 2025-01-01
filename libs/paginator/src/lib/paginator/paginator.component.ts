@@ -1,9 +1,9 @@
 import { Component, inject, input, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { PageBtnComponent } from "../page-btn/page-btn.component";
-import { colors } from "@ang-pokemon/pokemon";
 import { GetPokemonService } from "@ang-pokemon/pokemon";
-import { PokemonColors } from "@ang-pokemon/pokemon";
+import { PokemonColors } from "@ang-pokemon/shared";
+import { colors } from "@ang-pokemon/shared";
 interface UiData {
   sprite: string;
   name: string;
