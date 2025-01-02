@@ -1,2 +1,16 @@
-<p>Name: {{ (pokemonData | async)?.data?.name }}</p>
-<p>Sprite: {{ (pokemonData | async)?.data?.sprites?.front_default }}</p>
+<a routerLink="/home">Go Home</a>
+<p>Name: {{ pokemonData.name }}</p>
+<p>Weight: {{ pokemonData.weight }}</p>
+<p>Types: {{ pokemonData.types }}</p>
+<ul>
+  Sprites: @for(sprite of pokemonData.sprites;track $index){
+  <li>
+    <img [src]="sprite" alt="idk" />
+  </li>
+  }
+</ul>
+<ul>
+  Moves: @for(move of pokemonData.moves;track $index){
+  <li>{{ move }}</li>
+  }
+</ul>

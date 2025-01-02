@@ -13,5 +13,5 @@
     "jest.config.ts",
     "src/**/*.test.ts"
   ],
-  "include": ["src/**/*.ts", "../shared/src/lib/util/pokemondefs.ts"]
+  "include": ["src/**/*.ts"]
 }

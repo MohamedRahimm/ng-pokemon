@@ -1,3 +1,4 @@
-export * from "../../pokemon/src/lib/util/pokemondefs";
-export * from "../../pokemon/src/lib/util/pokemonColors";
-export * from "./lib/ui/not-found.component";
+export * from "./lib/ui/not-found/not-found.component";
+export * from "./lib/ui/login/login.component";
+export * from "./lib/util/pokemonColors";
+export * from "./lib/util/pokemondefs";

@@ -1,1 +1,7 @@
+@if(authService.currentUserSig()?.email){
+<p>Currently Signed in with: {{ authService.currentUserSig()?.email }}</p>
+} @else if (authService.currentUserSig()?.email) {
+<p>Currently Signed in with: loading...</p>
+}
+<button (click)="logout()">logout</button>
 <router-outlet></router-outlet>

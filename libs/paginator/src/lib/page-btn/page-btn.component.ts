@@ -1,5 +1,6 @@
 import { Component, input, output } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { PokemonColors } from "@ang-pokemon/shared";
 
 @Component({
   selector: "lib-page-btn",
@@ -8,8 +9,8 @@ import { CommonModule } from "@angular/common";
   styleUrl: "./page-btn.component.css",
 })
 export class PageBtnComponent {
-  pageNum = input.required<number>();
-  out = output<number>();
+  pageNum = input.required<PokemonColors>();
+  out = output<PokemonColors>();
   handleClick() {
     this.out.emit(this.pageNum());
   }

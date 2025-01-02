@@ -18,7 +18,4 @@ export class HomeComponent implements OnInit {
       this.hideOtherElems = this.router.url.includes("pokemon");
     });
   }
-  navigateToPokemon() {
-    this.router.navigateByUrl("/pokemon/red-charmander");
-  }
 }

@@ -1,21 +1,22 @@
 import { Route } from "@angular/router";
 import { PokemonComponent } from "@ang-pokemon/pokemon";
-import { NotFoundComponent } from "@ang-pokemon/shared";
+import { LoginComponent, NotFoundComponent } from "@ang-pokemon/shared";
 import { HomeComponent } from "./components/home.component";
 export const appRoutes: Route[] = [
   {
     path: "",
-    redirectTo: "home",
+    redirectTo: "login",
     pathMatch: "full",
   },
   {
     path: "home",
     component: HomeComponent,
     title: "Home",
+    canActivate:
   },
   {
     path: "login",
-    component: ,
+    component: LoginComponent,
     title: "login",
   },
   {
