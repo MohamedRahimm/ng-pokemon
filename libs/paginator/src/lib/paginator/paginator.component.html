@@ -1,21 +1,29 @@
-@for(data of display;track data.pokemon.name){
-<div>
-  @defer(on viewport){
-  <p>{{ data.pokemon.name }}</p>
-  <a [routerLink]="data.url">
-    <img [src]="data.pokemon.sprite" alt="idk" />
-  </a>
-  } @loading {
+<section>
+  @for(data of display;track data.pokemon.name){
+  <div>
+    @defer(on viewport){
+    <p>{{ data.pokemon.name }}</p>
+    <a [routerLink]="data.url">
+      <img [src]="data.pokemon.sprite" alt="idk" />
+    </a>
+    } @loading {
+    <p>loading...</p>
+    } @placeholder {
+    <p>pokemon</p>
+    }
+  </div>
+  } @empty {
   <p>loading...</p>
-  } @placeholder {
-  <p>pokemon</p>
   }
-</div>
-} @empty {
-<p>loading...</p>
-}
-<ul>
-  @for(page of pages; track $index){
-  <lib-page-btn [pageNum]="page" (out)="changePage($event)"></lib-page-btn>
-  }
-</ul>
+</section>
+<footer>
+  <ul>
+    @for(page of pages; track $index){
+    <lib-page-btn
+      [pageNum]="page"
+      [className]="page"
+      (out)="changePage($event)"
+    ></lib-page-btn>
+    }
+  </ul>
+</footer>

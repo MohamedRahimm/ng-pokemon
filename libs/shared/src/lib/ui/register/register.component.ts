@@ -7,12 +7,12 @@ import {
   Validators,
   ReactiveFormsModule,
 } from "@angular/forms";
-import { Router } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { FirebaseError } from "@angular/fire/app";
 
 @Component({
   selector: "lib-register",
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: "./register.component.html",
   styleUrl: "./register.component.css",
 })

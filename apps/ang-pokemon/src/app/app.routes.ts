@@ -1,50 +1,53 @@
 import { Route } from "@angular/router";
-import { PokemonComponent } from "@ang-pokemon/pokemon";
-import {
-  LoginComponent,
-  NotFoundComponent,
-  RegisterComponent,
-} from "@ang-pokemon/shared";
-import { authGuard } from "./guards/auth.guard";
+import { authGuard, testGuard } from "./guards/auth.guard";
+import { PokemonCatalogRootComponent } from "./components/pokemon-catalog-root/pokemon-catalog-root.component";
 import { PokemonCatalogComponent } from "./components/pokemon-catalog/pokemon-catalog.component";
 export const appRoutes: Route[] = [
   {
     path: "",
-    // auth guard to redirect to either login or register
-    redirectTo: "login",
+    redirectTo: "register",
     pathMatch: "full",
   },
   {
     path: "register",
-    // auth guard this
-    component: RegisterComponent,
+    canActivate: [testGuard],
+    loadComponent: () =>
+      import("@ang-pokemon/shared").then((c) => c.RegisterComponent),
     title: "register",
   },
   {
     path: "login",
-    // auth guard this
-    component: LoginComponent,
+    canActivate: [testGuard],
     title: "login",
+    loadComponent: () =>
+      import("@ang-pokemon/shared").then((c) => c.LoginComponent),
   },
   {
     path: "pokemon",
-    component: PokemonCatalogComponent,
+    component: PokemonCatalogRootComponent,
     title: "pokemon-catalogue",
-    // canActivate: [authGuard],
-    // canActivateChild: [authGuard],
+    canActivate: [authGuard],
+    canActivateChild: [authGuard],
     children: [
+      {
+        path: "catalog",
+        pathMatch: "full",
+        component: PokemonCatalogComponent,
+      },
       {
         path: ":id",
         pathMatch: "full",
-        component: PokemonComponent,
         title: "pokemon",
+        loadChildren: () =>
+          import("@ang-pokemon/pokemon").then((c) => c.PokemonComponent),
       },
     ],
   },
   {
     path: "**",
     pathMatch: "full",
-    component: NotFoundComponent,
+    loadComponent: () =>
+      import("@ang-pokemon/shared").then((c) => c.NotFoundComponent),
     title: "404 - Page Not Found",
   },
 ];
