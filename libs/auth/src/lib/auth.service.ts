@@ -2,6 +2,7 @@ import { inject, Injectable, signal, WritableSignal } from "@angular/core";
 import {
   Auth,
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
   user,
@@ -35,5 +36,8 @@ export class AuthService {
   logout(): Observable<void> {
     const promise = signOut(this.firebaseAuth);
     return from(promise);
+  }
+  changePassword(email: string): Observable<void> {
+    return from(sendPasswordResetEmail(this.firebaseAuth, email));
   }
 }

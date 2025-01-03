@@ -1,24 +1,2 @@
-<form [formGroup]="form" (ngSubmit)="handleSumbit()">
-  <label>
-    Email
-    <input
-      type="email"
-      formControlName="email"
-      placeholder="email"
-      [class.error]="isInvalid('email')"
-    />
-  </label>
-  @if(!validEmail){
-  <span>Invalid Email</span>
-  }
-  <label>
-    Password
-    <input
-      type="text"
-      formControlName="password"
-      placeholder="password"
-      [class.error]="isInvalid('password')"
-    />
-  </label>
-  <button type="submit">Submit</button>
-</form>
+<lib-register></lib-register>
+<button>Forgot Password?</button>
