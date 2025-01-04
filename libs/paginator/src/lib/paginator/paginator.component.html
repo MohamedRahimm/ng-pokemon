@@ -1,5 +1,5 @@
 <section>
-  @for(data of display;track data.pokemon.name){
+  @for(data of currentPage().content;track data.pokemon.name){
   <div>
     @defer(on viewport){
     <p>{{ data.pokemon.name }}</p>
@@ -18,11 +18,11 @@
 </section>
 <footer>
   <ul>
-    @for(page of pages; track $index){
+    @for(page of pageNames(); track $index;let idx = $index){
     <lib-page-btn
-      [pageNum]="page"
-      [className]="page"
-      (out)="changePage($event)"
+      [pageNum]="idx"
+      [pageName]="page"
+      (pageInfo)="changePange($event)"
     ></lib-page-btn>
     }
   </ul>

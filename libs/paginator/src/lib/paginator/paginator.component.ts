@@ -1,18 +1,12 @@
-import { Component, inject, input, OnInit } from "@angular/core";
+import { Component, input, output, signal } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { PageBtnComponent } from "../page-btn/page-btn.component";
-import { GetPokemonService } from "@ang-pokemon/pokemon";
-import { PokemonColors } from "@ang-pokemon/shared";
-import { colors } from "@ang-pokemon/shared";
 import { RouterLink } from "@angular/router";
-interface UiData {
-  sprite: string;
-  name: string;
-}
-interface Colors {
-  color: PokemonColors;
-  pokemon: UiData;
+import { PokemonColors } from "@ang-pokemon/shared";
+export interface Content {
+  color: string;
   url: string;
+  pokemon: { sprite: string; name: string };
 }
 @Component({
   selector: "lib-paginator",
@@ -20,26 +14,30 @@ interface Colors {
   templateUrl: "./paginator.component.html",
   styleUrl: "./paginator.component.css",
 })
-export class PaginatorComponent implements OnInit {
-  pokemonService = inject(GetPokemonService);
-  totalPages = input.required<number>();
-  pages: PokemonColors[] = [];
-  display: Colors[] = [];
-  ngOnInit(): void {
-    this.pages = [...Array(this.totalPages()).keys()].map((val) => colors[val]);
-    this.changePage(colors[0]);
+export class PaginatorComponent {
+  pageNames = input.required<string[]>();
+  currentPage = input.required<{
+    num: number;
+    name: string;
+    content: Content[];
+  }>();
+  idk = output<{ num: number; name: string }>();
+  changePange({ num, name }: { num: number; name: string }) {
+    this.idk.emit({ num, name });
   }
-  pageContent: unknown;
-  changePage(color: PokemonColors) {
-    this.display = [];
-    this.pokemonService.getPokemonByColor(color).subscribe((val) => {
-      val.data.forEach((idk) => {
-        this.display.push({
-          color,
-          pokemon: { sprite: idk.sprites.front_default, name: idk.name },
-          url: `/pokemon/${color}-${idk.name}`,
-        });
-      });
-    });
-  }
+  //   ngOnInit(): void {
+  //     this.pages = [...Array(this.totalPages()).keys()].map((val) => colors[val]);
+  //     this.changePage(colors[0]);
+  //   }
+  //   changePage(color: PokemonColors) {
+  //     this.pageContent = [];
+  //     this.pokemonService.getPokemonByColor(color).subscribe((val) => {
+  //       val.data.forEach((idk) => {
+  //         this.pageContent.push({
+  //           color,
+  //           pokemon: { sprite: idk.sprites.front_default, name: idk.name },
+  //           url: `/pokemon/${color}-${idk.name}`,
+  //         });
+  //       });
+  //     });
 }

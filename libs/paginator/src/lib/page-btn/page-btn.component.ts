@@ -9,9 +9,10 @@ import { PokemonColors } from "@ang-pokemon/shared";
   styleUrl: "./page-btn.component.css",
 })
 export class PageBtnComponent {
-  pageNum = input.required<PokemonColors>();
-  out = output<PokemonColors>();
+  pageNum = input.required<number>();
+  pageName = input.required<string>();
+  pageInfo = output<{ num: number; name: string }>();
   handleClick() {
-    this.out.emit(this.pageNum());
+    this.pageInfo.emit({ num: this.pageNum(), name: this.pageName() });
   }
 }

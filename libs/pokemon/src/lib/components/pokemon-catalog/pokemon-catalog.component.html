@@ -1,0 +1,8 @@
+@if(!currentPage){
+<p>loading...</p>
+}
+<lib-paginator
+  [pageNames]="pageNames"
+  [currentPage]="currentPage"
+  (idk)="somefunc($event)"
+></lib-paginator>

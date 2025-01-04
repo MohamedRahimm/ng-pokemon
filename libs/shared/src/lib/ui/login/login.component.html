@@ -1,2 +1,28 @@
-<lib-register></lib-register>
-<button>Forgot Password?</button>
+<form [formGroup]="form" (ngSubmit)="handleSumbit()">
+  <label>
+    Email
+    <input
+      type="email"
+      formControlName="email"
+      placeholder="email"
+      name="email"
+      [class.error]="isInvalid('email') || !validEmail"
+    />
+  </label>
+  <label>
+    Password
+    <input
+      type="text"
+      formControlName="password"
+      placeholder="password"
+      name="password"
+      [class.error]="isInvalid('password')"
+    />
+  </label>
+  <button type="submit">Submit</button>
+</form>
+<p>Need to register?</p>
+<a routerLink="/register">register</a>
+<!-- <button (click)="authService.changePassword('javidrahim2005@gmail.com')">
+  Change pw
+</button> -->

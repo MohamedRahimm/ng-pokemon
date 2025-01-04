@@ -1,7 +1,11 @@
 import { Route } from "@angular/router";
-import { authGuard, testGuard } from "./guards/auth.guard";
+import { authGuard } from "./guards/auth/auth.guard";
+import { authRedirectGuard } from "./guards/auth-redirect/auth-redirect.guard";
 import { PokemonCatalogRootComponent } from "./components/pokemon-catalog-root/pokemon-catalog-root.component";
-import { PokemonCatalogComponent } from "./components/pokemon-catalog/pokemon-catalog.component";
+import {
+  PokemonCatalogComponent,
+  PokemonComponent,
+} from "@ang-pokemon/pokemon";
 export const appRoutes: Route[] = [
   {
     path: "",
@@ -10,14 +14,14 @@ export const appRoutes: Route[] = [
   },
   {
     path: "register",
-    canActivate: [testGuard],
+    canActivate: [authRedirectGuard],
     loadComponent: () =>
       import("@ang-pokemon/shared").then((c) => c.RegisterComponent),
     title: "register",
   },
   {
     path: "login",
-    canActivate: [testGuard],
+    canActivate: [authRedirectGuard],
     title: "login",
     loadComponent: () =>
       import("@ang-pokemon/shared").then((c) => c.LoginComponent),
@@ -38,8 +42,7 @@ export const appRoutes: Route[] = [
         path: ":id",
         pathMatch: "full",
         title: "pokemon",
-        loadChildren: () =>
-          import("@ang-pokemon/pokemon").then((c) => c.PokemonComponent),
+        component: PokemonComponent,
       },
     ],
   },

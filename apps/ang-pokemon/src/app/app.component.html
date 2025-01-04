@@ -1,7 +1,6 @@
-@if(authService.currentUserSig()?.email){
-<p>Currently Signed in with: {{ authService.currentUserSig()?.email }}</p>
-} @else if (authService.currentUserSig()?.email) {
-<p>Currently Signed in with: loading...</p>
-}
-<button (click)="logout()">logout</button>
+<header>
+  <h1>Epic Pokemon Catalog</h1>
+  <p>Currently Signed in with: {{ tmp }}</p>
+  <button (click)="logout()">logout</button>
+</header>
 <router-outlet></router-outlet>

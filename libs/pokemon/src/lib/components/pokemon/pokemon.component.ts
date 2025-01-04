@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { PokemonColors } from "@ang-pokemon/shared";
-import { GetPokemonService } from "../services/get-pokemon/get-pokemon.service";
+import { GetPokemonService } from "../../services/get-pokemon/get-pokemon.service";
 import { map, switchMap } from "rxjs";
 @Component({
   selector: "lib-pokemon",

@@ -17,18 +17,3 @@ export const authGuard: CanActivateFn = () => {
     })
   );
 };
-
-export const testGuard: CanActivateFn = () => {
-  const router = inject(Router);
-  const authService = inject(AuthService);
-  return authService.user$.pipe(
-    map((user) => {
-      if (user) {
-        router.navigateByUrl("/pokemon/catalog");
-        return false;
-      } else {
-        return true;
-      }
-    })
-  );
-};
