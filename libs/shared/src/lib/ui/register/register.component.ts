@@ -37,7 +37,10 @@ export class RegisterComponent {
     const password = this.form.value.password;
     if (email && password)
       this.authService.register(email, password).subscribe({
-        next: () => this.router.navigateByUrl("/"),
+        next: () => {
+          this.router.navigate(["/"]);
+          this.authService.userSignal.set(email);
+        },
         error: (err: FirebaseError) =>
           console.error(err.message, err.customData),
       });

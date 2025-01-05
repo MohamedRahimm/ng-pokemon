@@ -8,12 +8,13 @@ import {
 } from "@angular/forms";
 import { RegisterComponent } from "../register/register.component";
 import { AuthService } from "@ang-pokemon/auth";
-import { Router } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { FirebaseError } from "@angular/fire/app";
+import { first } from "rxjs";
 
 @Component({
   selector: "lib-login",
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: "./login.component.html",
   styleUrl: "./login.component.css",
 })
@@ -38,9 +39,11 @@ export class LoginComponent implements RegisterComponent {
     const password = this.form.value.password;
     if (email && password)
       this.authService.login(email, password).subscribe({
-        next: () => this.router.navigateByUrl("/"),
-        error: (err: FirebaseError) =>
-          console.error(err.message, err.customData),
+        next: () => {
+          this.router.navigateByUrl("/pokemon");
+          this.authService.userSignal.set(email);
+        },
+        error: (err: FirebaseError) => console.error(err.message),
       });
   }
 }

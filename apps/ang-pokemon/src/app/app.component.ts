@@ -1,25 +1,19 @@
 import { AuthService } from "@ang-pokemon/auth";
-import { Component, inject, OnInit } from "@angular/core";
+import { Component, inject, OnInit, signal } from "@angular/core";
 import { Router, RouterModule } from "@angular/router";
+import { from, switchMap } from "rxjs";
 @Component({
   imports: [RouterModule],
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   authService = inject(AuthService);
   router = inject(Router);
-  tmp = "";
-  ngOnInit(): void {
-    this.authService.user$.subscribe((val) => {
-      if (val) {
-        this.tmp = val.email || "";
-      }
-    });
-  }
   logout() {
+    this.router.navigate(["/"]);
     this.authService.logout();
-    this.router.navigateByUrl("/");
+    this.authService.userSignal.set("");
   }
 }

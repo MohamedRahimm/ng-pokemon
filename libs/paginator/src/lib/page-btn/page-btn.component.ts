@@ -1,6 +1,5 @@
 import { Component, input, output } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { PokemonColors } from "@ang-pokemon/shared";
 
 @Component({
   selector: "lib-page-btn",

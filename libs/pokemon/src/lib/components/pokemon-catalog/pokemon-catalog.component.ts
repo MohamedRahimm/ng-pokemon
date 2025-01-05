@@ -22,18 +22,18 @@ export class PokemonCatalogComponent {
     const content: Content[] = [];
     this.pokemonService
       .getPokemonByColor(name as PokemonColors)
-      .subscribe((val) => {
-        val.data.forEach((idk) => {
+      .subscribe((pokemon) => {
+        pokemon.data.forEach((prop) => {
           content.push({
             color: name,
-            pokemon: { sprite: idk.sprites.front_default, name: idk.name },
-            url: `/pokemon/${name}-${idk.name}`,
+            pokemon: { sprite: prop.sprites.front_default, name: prop.name },
+            url: `/pokemon/${name}-${prop.name}`,
           });
         });
       });
     return content;
   }
-  somefunc({ name, num }: { name: string; num: number }) {
+  changePange({ name, num }: { name: string; num: number }) {
     this.currentPage.name = name;
     this.currentPage.num = num;
     this.currentPage.content = this.loadContent(name);

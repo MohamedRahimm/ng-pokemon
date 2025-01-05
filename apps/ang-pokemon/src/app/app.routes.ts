@@ -14,14 +14,14 @@ export const appRoutes: Route[] = [
   },
   {
     path: "register",
-    canActivate: [authRedirectGuard],
+    // canActivate: [authRedirectGuard],
     loadComponent: () =>
       import("@ang-pokemon/shared").then((c) => c.RegisterComponent),
     title: "register",
   },
   {
     path: "login",
-    canActivate: [authRedirectGuard],
+    // canActivate: [authRedirectGuard],
     title: "login",
     loadComponent: () =>
       import("@ang-pokemon/shared").then((c) => c.LoginComponent),
@@ -30,8 +30,8 @@ export const appRoutes: Route[] = [
     path: "pokemon",
     component: PokemonCatalogRootComponent,
     title: "pokemon-catalogue",
-    canActivate: [authGuard],
-    canActivateChild: [authGuard],
+    // canActivate: [authGuard],
+    // canActivateChild: [authGuard],
     children: [
       {
         path: "catalog",
