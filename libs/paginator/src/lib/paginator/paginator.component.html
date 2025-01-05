@@ -1,9 +1,12 @@
+@if(!currentPage().content){
+<p>loading...</p>
+}
 <section>
   @for(data of currentPage().content;track data.pokemon.name){
   <div>
     @defer(on viewport){
-    <p>{{ data.pokemon.name }}</p>
     <a [routerLink]="data.url">
+      <p>{{ data.pokemon.name }}</p>
       <img [src]="data.pokemon.sprite" alt="idk" />
     </a>
     } @loading {
@@ -18,12 +21,15 @@
 </section>
 <footer>
   <ul>
+    <li>Pages:</li>
     @for(page of pageNames(); track $index;let idx = $index){
-    <lib-page-btn
-      [pageNum]="idx"
-      [pageName]="page"
-      (pageInfo)="changePange($event)"
-    ></lib-page-btn>
+    <li>
+      <lib-page-btn
+        [pageNum]="idx"
+        [pageName]="page"
+        (pageInfo)="changePange($event)"
+      ></lib-page-btn>
+    </li>
     }
   </ul>
 </footer>

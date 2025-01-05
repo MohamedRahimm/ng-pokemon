@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { openDB } from "idb";
-import { PokemonColors, PokemonInfo } from "@ang-pokemon/shared";
-import { colors } from "@ang-pokemon/shared";
+import { PokemonColors, PokemonInfo, colors } from "@ang-pokemon/shared";
 @Injectable({
   providedIn: "root",
 })

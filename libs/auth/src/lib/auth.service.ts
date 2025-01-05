@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import {
   Auth,
   createUserWithEmailAndPassword,
@@ -14,7 +14,7 @@ import { from, map, Observable } from "rxjs";
 export class AuthService {
   private firebaseAuth = inject(Auth);
   user$ = user(this.firebaseAuth);
-  userSignal = signal<string>("");
+  userEmail$ = this.user$.pipe(map((info) => info?.email || ""));
   register(email: string, password: string): Observable<void> {
     const promise = createUserWithEmailAndPassword(
       this.firebaseAuth,

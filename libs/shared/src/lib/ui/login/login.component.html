@@ -1,3 +1,7 @@
+@if(loading|async){
+<p>loading...</p>
+} @else{
+
 <form [formGroup]="form" (ngSubmit)="handleSumbit()">
   <label>
     Email
@@ -9,9 +13,6 @@
       [class.error]="isInvalid('email')"
     />
   </label>
-  @if(isInvalid('email')){
-  <p>Email is Invalid</p>
-  }
   <label>
     Password
     <input
@@ -22,13 +23,11 @@
       [class.error]="isInvalid('password')"
     />
   </label>
-  @if(isInvalid('password')){
-  <p>password must be at least 6 characters</p>
-  }
   <button type="submit">Submit</button>
+  @if(error()){
+  <p>{{ error() }}</p>
+  }
 </form>
 <p>Need to register?</p>
 <a routerLink="/register">register</a>
-<!-- <button (click)="authService.changePassword('javidrahim2005@gmail.com')">
-  Change pw
-</button> -->
+}

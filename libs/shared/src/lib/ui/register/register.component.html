@@ -1,3 +1,6 @@
+@if(loading | async){
+<p>loading...</p>
+} @else{
 <form [formGroup]="form" (ngSubmit)="handleSumbit()">
   <label>
     Email
@@ -20,9 +23,10 @@
     />
   </label>
   <button type="submit">Submit</button>
+  @if(error()){
+  <p>{{ error() }}</p>
+  }
 </form>
 <p>Already Logged in?</p>
 <a routerLink="/login">login</a>
-<!-- <button (click)="authService.changePassword('javidrahim2005@gmail.com')">
-  Change pw
-</button> -->
+}

@@ -1,6 +1,6 @@
 <header>
   <h1>Epic Pokemon Catalog</h1>
-  <p>Currently Signed in with: {{ authService.userSignal() }}</p>
+  <p>Currently Signed in with: {{ authService.userEmail$ | async }}</p>
   <button (click)="logout()">logout</button>
 </header>
 <router-outlet></router-outlet>
