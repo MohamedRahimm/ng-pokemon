@@ -7,7 +7,7 @@ import {
   signOut,
   user,
 } from "@angular/fire/auth";
-import { from, map, Observable, switchMap } from "rxjs";
+import { from, map, Observable } from "rxjs";
 @Injectable({
   providedIn: "root",
 })

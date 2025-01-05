@@ -10,7 +10,6 @@ import { RegisterComponent } from "../register/register.component";
 import { AuthService } from "@ang-pokemon/auth";
 import { Router, RouterLink } from "@angular/router";
 import { FirebaseError } from "@angular/fire/app";
-import { first } from "rxjs";
 
 @Component({
   selector: "lib-login",
@@ -29,7 +28,6 @@ export class LoginComponent implements RegisterComponent {
       Validators.minLength(6),
     ]),
   });
-  validEmail = true;
   isInvalid(field: "email" | "password") {
     const getter = this.form.get(field);
     return getter?.invalid && (getter.dirty || getter.touched);

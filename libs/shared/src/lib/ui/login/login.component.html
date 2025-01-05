@@ -6,9 +6,12 @@
       formControlName="email"
       placeholder="email"
       name="email"
-      [class.error]="isInvalid('email') || !validEmail"
+      [class.error]="isInvalid('email')"
     />
   </label>
+  @if(isInvalid('email')){
+  <p>Email is Invalid</p>
+  }
   <label>
     Password
     <input
@@ -19,6 +22,9 @@
       [class.error]="isInvalid('password')"
     />
   </label>
+  @if(isInvalid('password')){
+  <p>password must be at least 6 characters</p>
+  }
   <button type="submit">Submit</button>
 </form>
 <p>Need to register?</p>

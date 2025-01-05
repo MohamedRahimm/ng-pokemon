@@ -27,7 +27,6 @@ export class RegisterComponent {
       Validators.minLength(6),
     ]),
   });
-  validEmail = true;
   isInvalid(field: "email" | "password") {
     const getter = this.form.get(field);
     return getter?.invalid && (getter.dirty || getter.touched);
