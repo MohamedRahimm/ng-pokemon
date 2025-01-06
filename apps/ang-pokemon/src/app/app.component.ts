@@ -13,7 +13,6 @@ export class AppComponent implements OnInit {
   router = inject(Router);
   ngOnInit(): void {
     this.router.events.subscribe((e) => {
-      console.log(e);
       if (e instanceof NavigationEnd) {
         if (e.url === "/pokemon" || e.urlAfterRedirects === "/pokemon") {
           this.router.navigateByUrl("/pokemon/catalog");

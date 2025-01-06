@@ -1,6 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import {
   Auth,
+  confirmPasswordReset,
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
@@ -37,6 +38,13 @@ export class AuthService {
   }
   //implement this
   changePassword(email: string): Observable<void> {
-    return from(sendPasswordResetEmail(this.firebaseAuth, email));
+    return from(
+      sendPasswordResetEmail(this.firebaseAuth, email, {
+        url: "http://localhost:4200/reset-pw",
+      })
+    );
+  }
+  idk(oobCode: string, newPassword: string): Observable<void> {
+    return from(confirmPasswordReset(this.firebaseAuth, oobCode, newPassword));
   }
 }

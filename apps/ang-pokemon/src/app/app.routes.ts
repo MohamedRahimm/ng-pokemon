@@ -27,6 +27,30 @@ export const appRoutes: Route[] = [
       import("@ang-pokemon/shared").then((c) => c.LoginComponent),
   },
   {
+    path: "password",
+    canActivate: [authRedirectGuard],
+    canActivateChild: [authRedirectGuard],
+    title: "Reset Passoword",
+    loadComponent: () =>
+      import("./components/password-root/password-root.component").then(
+        (c) => c.PasswordRootComponent
+      ),
+    children: [
+      {
+        path: "",
+        pathMatch: "full",
+        loadComponent: () =>
+          import("@ang-pokemon/shared").then((c) => c.PasswordComponent),
+      },
+      {
+        path: "reset",
+        pathMatch: "prefix",
+        loadComponent: () =>
+          import("@ang-pokemon/shared").then((c) => c.ResetPwComponent),
+      },
+    ],
+  },
+  {
     path: "pokemon",
     component: PokemonCatalogRootComponent,
     title: "pokemon-catalogue",
