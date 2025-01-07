@@ -1,3 +1,14 @@
+form {
+    display: grid;
+    justify-content: center;
+    font-family: "Geist Sans", serif;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+}
+
 .error {
     border: 1px solid red;
 }
