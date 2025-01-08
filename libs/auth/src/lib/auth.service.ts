@@ -37,14 +37,17 @@ export class AuthService {
     return from(promise);
   }
   //implement this
-  changePassword(email: string): Observable<void> {
+  changePasswordInit(email: string): Observable<void> {
     return from(
       sendPasswordResetEmail(this.firebaseAuth, email, {
-        url: "http://localhost:4200/reset-pw",
+        url: "https://ng-pokemon-lime.vercel.app/password/reset?mode=action&oobCode=code",
       })
     );
   }
-  idk(oobCode: string, newPassword: string): Observable<void> {
+  changePasswordConfirm(
+    oobCode: string,
+    newPassword: string
+  ): Observable<void> {
     return from(confirmPasswordReset(this.firebaseAuth, oobCode, newPassword));
   }
 }

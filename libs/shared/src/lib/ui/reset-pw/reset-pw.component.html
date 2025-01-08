@@ -1,14 +1,1 @@
-@if(error()){
-<p>An error occurred please try again</p>
-} @else{
-
-<form [formGroup]="form" (ngSubmit)="handleSubmit()">
-  <input
-    type="password"
-    name="password"
-    placeholder="password"
-    formControlName="password"
-  />
-  <button type="submit">Submit</button>
-</form>
-}
+<lib-form></lib-form>

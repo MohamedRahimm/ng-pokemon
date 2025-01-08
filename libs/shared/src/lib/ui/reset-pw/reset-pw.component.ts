@@ -1,33 +1,51 @@
-import { Component, inject, OnInit, signal } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { Router } from "@angular/router";
-import { ActivatedRoute } from "@angular/router";
 import { AuthService } from "@ang-pokemon/auth";
+import { CommonModule } from "@angular/common";
 import {
-  FormGroup,
-  FormControl,
-  Validators,
-  ReactiveFormsModule,
-} from "@angular/forms";
+  AfterViewInit,
+  Component,
+  inject,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
+import { FormControl, ReactiveFormsModule, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { FormComponent } from "../form/form.component";
 @Component({
   selector: "lib-reset-pw",
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormComponent],
   templateUrl: "./reset-pw.component.html",
   styleUrl: "./reset-pw.component.css",
 })
-export class ResetPwComponent implements OnInit {
+export class ResetPwComponent implements AfterViewInit, OnInit {
   router = inject(Router);
   route = inject(ActivatedRoute);
   authService = inject(AuthService);
   mode = "";
   actionCode = "";
-  error = signal<string>("");
-  form = new FormGroup({
-    password: new FormControl("", [
-      Validators.required,
-      Validators.minLength(6),
-    ]),
-  });
+  @ViewChild(FormComponent) formComponent!: FormComponent;
+  ngAfterViewInit() {
+    this.formComponent.addControl(
+      "password",
+      "password",
+      new FormControl("", [Validators.required, Validators.minLength(6)])
+    );
+    this.formComponent.handleSubmit = () => {
+      if (this.formComponent.form.value["password"]) {
+        this.authService
+          .changePasswordConfirm(
+            this.actionCode,
+            this.formComponent.form.value["password"]
+          )
+          .subscribe({
+            next: () => this.router.navigateByUrl("/pokemon"),
+            error: () =>
+              this.formComponent.onErrorSignal.set(
+                "An error occurred please try again"
+              ),
+          });
+      }
+    };
+  }
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
       if (!params) this.router.navigateByUrl("/");
@@ -38,15 +56,5 @@ export class ResetPwComponent implements OnInit {
         this.router.navigateByUrl("/");
       }
     });
-  }
-  handleSubmit() {
-    if (this.form.value.password) {
-      this.authService
-        .idk(this.actionCode, this.form.value.password)
-        .subscribe({
-          next: () => this.router.navigateByUrl("/pokemon"),
-          error: () => this.error.set("An error occurred please try again"),
-        });
-    }
   }
 }

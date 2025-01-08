@@ -1,5 +1,8 @@
 <header>
-    <h1>Epic Pokemon Catalog</h1>
+    <a routerLink="/">
+
+        <h1>Epic Pokemon Catalog</h1>
+    </a>
     <p>Currently Signed in with: {{ authService.userEmail$ | async }}</p>
     <button (click)="logout()">logout</button>
     <a href="https://github.com/MohamedRahimm/ng-pokemon" target="_blank">

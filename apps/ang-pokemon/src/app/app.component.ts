@@ -1,9 +1,14 @@
 import { AuthService } from "@ang-pokemon/auth";
 import { Component, inject, OnInit } from "@angular/core";
-import { NavigationEnd, Router, RouterModule } from "@angular/router";
+import {
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterModule,
+} from "@angular/router";
 import { AsyncPipe } from "@angular/common";
 @Component({
-  imports: [RouterModule, AsyncPipe],
+  imports: [RouterModule, AsyncPipe, RouterLink],
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
