@@ -31,12 +31,13 @@ export class PasswordComponent implements AfterViewInit {
       const email = this.formComponent.form.value["email"];
       if (email) {
         this.formComponent.loading.next(true);
+        this.formComponent.onCompleteSignal.set("");
         this.authService
           .changePasswordInit(email)
           .pipe(finalize(() => this.formComponent.loading.next(false)))
           .subscribe({
             next: () => {
-              this.formComponent.onCompleteSignal.set("Check Your Email");
+              this.formComponent.onCompleteSignal.set("Check Your Email!");
             },
             error: () =>
               this.formComponent.onErrorSignal.set(

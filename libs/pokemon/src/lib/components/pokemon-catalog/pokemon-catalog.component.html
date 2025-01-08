@@ -1,8 +1,5 @@
 @if(!currentPage){
 <p>loading...</p>
 }
-<lib-paginator
-  [pageNames]="pageNames"
-  [currentPage]="currentPage"
-  (pageInfo)="changePange($event)"
-></lib-paginator>
+<h1>Pokemon Collection</h1>
+<lib-paginator [pageNames]="pageNames" [currentPage]="currentPage" (pageInfo)="changePange($event)"></lib-paginator>

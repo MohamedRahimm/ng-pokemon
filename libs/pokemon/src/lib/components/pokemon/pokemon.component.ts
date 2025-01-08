@@ -1,12 +1,12 @@
-import { Component, inject, OnInit } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { ActivatedRoute, RouterLink } from "@angular/router";
 import { PokemonColors } from "@ang-pokemon/shared";
-import { GetPokemonService } from "../../services/get-pokemon/get-pokemon.service";
+import { CommonModule } from "@angular/common";
+import { Component, inject, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { map, switchMap } from "rxjs";
+import { GetPokemonService } from "../../services/get-pokemon/get-pokemon.service";
 @Component({
   selector: "lib-pokemon",
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: "./pokemon.component.html",
   styleUrl: "./pokemon.component.css",
 })
@@ -39,7 +39,7 @@ export class PokemonComponent implements OnInit {
       )
       .subscribe((pokemon) => {
         this.pokemonData = {
-          name: pokemon.data.name,
+          name: pokemon.data.name[0].toUpperCase() + pokemon.data.name.slice(1),
           weight: pokemon.data.weight,
           types: pokemon.data.types.map((types) => types.type.name).toString(),
           moves: pokemon.data.moves.map((moves) => moves.move.name),

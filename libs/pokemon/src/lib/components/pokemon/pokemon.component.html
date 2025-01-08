@@ -1,16 +1,24 @@
-<a routerLink="/">Go Home</a>
-<p>Name: {{ pokemonData.name }}</p>
-<p>Weight: {{ pokemonData.weight }}</p>
-<p>Types: {{ pokemonData.types }}</p>
-<ul>
-  Sprites: @for(sprite of pokemonData.sprites;track $index){
-  <li>
-    <img [src]="sprite" alt="idk" />
-  </li>
-  }
-</ul>
-<ul>
-  Moves: @for(move of pokemonData.moves;track $index){
-  <li>{{ move }}</li>
-  }
-</ul>
+<main>
+    <h1>{{pokemonData.name}}</h1>
+    <div class="info-section">
+        <p>Name: {{pokemonData.name}}</p>
+        <p>Weight: {{pokemonData.weight}}</p>
+        <p>Types: {{pokemonData.types}}</p>
+    </div>
+
+
+    <p>Sprites:</p>
+    <div class="sprite-container">
+        @for(sprite of pokemonData.sprites;track $index){
+        <img class="sprite" [src]="sprite" alt="Image of {{pokemonData.name}}" />
+        }
+    </div>
+    <p>
+        Moves:
+    </p>
+    <ul>
+        @for(move of pokemonData.moves;track $index){
+        <li>{{ move }}</li>
+        }
+    </ul>
+</main>

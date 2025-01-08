@@ -5,7 +5,7 @@
 <form [formGroup]="form" (ngSubmit)="handleSubmit()">
     @for(param of HTMLparams;track $index){
     <label>
-        {{param.controlName}}
+        {{param.controlName[0].toUpperCase()+param.controlName.slice(1)}}
         <input [type]="param.type" [formControlName]="param.controlName" [name]="param.controlName"
             [class.error]="isInvalid(param.controlName)" />
     </label>
