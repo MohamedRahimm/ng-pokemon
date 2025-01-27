@@ -1,32 +1,16 @@
 import { AuthService } from "@ang-pokemon/auth";
-import { Component, inject, OnInit } from "@angular/core";
-import {
-  NavigationEnd,
-  Router,
-  RouterLink,
-  RouterModule,
-} from "@angular/router";
 import { AsyncPipe } from "@angular/common";
+import { Component, inject } from "@angular/core";
+import { Router, RouterLink, RouterModule } from "@angular/router";
 @Component({
   imports: [RouterModule, AsyncPipe, RouterLink],
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   authService = inject(AuthService);
   router = inject(Router);
-  ngOnInit(): void {
-    this.router.events.subscribe((e) => {
-      if (e instanceof NavigationEnd) {
-        if (e.url === "/pokemon" || e.urlAfterRedirects === "/pokemon") {
-          this.router.navigateByUrl("/pokemon/catalog");
-        } else if (e.url === "/" || e.urlAfterRedirects === "/") {
-          this.router.navigateByUrl("/register");
-        }
-      }
-    });
-  }
   logout() {
     this.authService.logout().subscribe({
       next: () => {

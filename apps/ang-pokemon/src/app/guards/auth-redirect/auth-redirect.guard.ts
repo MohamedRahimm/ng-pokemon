@@ -10,7 +10,7 @@ export const authRedirectGuard: CanActivateFn = () => {
   return authService.user$.pipe(
     map((user) => {
       if (user) {
-        router.navigateByUrl("/pokemon/catalog");
+        router.navigateByUrl("/pokemon");
         return false;
       } else {
         return true;

@@ -5,6 +5,7 @@ main {
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
+    transform: translateY(50%);
 }
 
 h1 {
@@ -12,16 +13,16 @@ h1 {
     color: #333;
 }
 
-.login-link {
+.link {
     text-align: center;
     margin-top: 15px;
 }
 
-.login-link a {
+.link a {
     color: #007bff;
     text-decoration: none;
 }
 
-.login-link a:hover {
+.link a:hover {
     text-decoration: underline;
 }

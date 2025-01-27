@@ -1,11 +1,10 @@
-import { Route } from "@angular/router";
-import { authGuard } from "./guards/auth/auth.guard";
-import { authRedirectGuard } from "./guards/auth-redirect/auth-redirect.guard";
-import { PokemonCatalogRootComponent } from "./components/pokemon-catalog-root/pokemon-catalog-root.component";
 import {
   PokemonCatalogComponent,
   PokemonComponent,
 } from "@ang-pokemon/pokemon";
+import { Route } from "@angular/router";
+import { authRedirectGuard } from "./guards/auth-redirect/auth-redirect.guard";
+import { authGuard } from "./guards/auth/auth.guard";
 export const appRoutes: Route[] = [
   {
     path: "",
@@ -30,11 +29,7 @@ export const appRoutes: Route[] = [
     path: "password",
     canActivate: [authRedirectGuard],
     canActivateChild: [authRedirectGuard],
-    title: "Reset Passoword",
-    loadComponent: () =>
-      import("./components/password-root/password-root.component").then(
-        (c) => c.PasswordRootComponent
-      ),
+    title: "Reset Password",
     children: [
       {
         path: "",
@@ -52,13 +47,12 @@ export const appRoutes: Route[] = [
   },
   {
     path: "pokemon",
-    component: PokemonCatalogRootComponent,
-    title: "pokemon-catalogue",
+    title: "Pokemon Catalog",
     canActivate: [authGuard],
     canActivateChild: [authGuard],
     children: [
       {
-        path: "catalog",
+        path: "",
         pathMatch: "full",
         component: PokemonCatalogComponent,
       },

@@ -1,6 +1,6 @@
 import { PokemonColors } from "@ang-pokemon/shared";
 import { CommonModule } from "@angular/common";
-import { Component, inject, OnInit } from "@angular/core";
+import { Component, inject, OnInit, signal } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { map, switchMap } from "rxjs";
 import { GetPokemonService } from "../../services/get-pokemon/get-pokemon.service";
@@ -26,6 +26,7 @@ export class PokemonComponent implements OnInit {
     weight: 0,
     sprites: [],
   };
+  errorSignal = signal(false);
   ngOnInit(): void {
     this.route.params
       .pipe(
@@ -37,16 +38,24 @@ export class PokemonComponent implements OnInit {
           this.pokemonService.getPokemon(color, pokemon)
         )
       )
-      .subscribe((pokemon) => {
-        this.pokemonData = {
-          name: pokemon.data.name[0].toUpperCase() + pokemon.data.name.slice(1),
-          weight: pokemon.data.weight,
-          types: pokemon.data.types.map((types) => types.type.name).toString(),
-          moves: pokemon.data.moves.map((moves) => moves.move.name),
-          sprites: Object.values(pokemon.data.sprites).filter(
-            (sprite) => typeof sprite === "string"
-          ),
-        };
+      .subscribe({
+        error: () => {
+          this.errorSignal.set(true);
+        },
+        next: (pokemon) => {
+          this.pokemonData = {
+            name:
+              pokemon.data.name[0].toUpperCase() + pokemon.data.name.slice(1),
+            weight: pokemon.data.weight,
+            types: pokemon.data.types
+              .map((types) => types.type.name)
+              .toString(),
+            moves: pokemon.data.moves.map((moves) => moves.move.name),
+            sprites: Object.values(pokemon.data.sprites).filter(
+              (sprite) => typeof sprite === "string"
+            ),
+          };
+        },
       });
   }
 }

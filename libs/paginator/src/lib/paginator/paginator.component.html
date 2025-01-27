@@ -3,18 +3,22 @@
 }
 <section>
     @for(data of currentPage().content;track data.pokemon.name){
+    @defer(on viewport){
     <div>
-        @defer(on viewport){
         <a [routerLink]="data.url">
             <p>{{ data.pokemon.name }}</p>
             <img [src]="data.pokemon.sprite" alt="idk" />
         </a>
-        } @loading {
-        <p>loading...</p>
-        } @placeholder {
-        <p>pokemon</p>
-        }
     </div>
+    }
+    @placeholder {
+    <div>
+        <a routerLink="/">
+            <p>Charmander</p>
+            <img src="pokemon-placeholder.png" alt="idk" />
+        </a>
+    </div>
+    }
     } @empty {
     <p>loading...</p>
     }

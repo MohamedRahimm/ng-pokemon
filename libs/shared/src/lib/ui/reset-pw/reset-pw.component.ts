@@ -37,7 +37,12 @@ export class ResetPwComponent implements AfterViewInit, OnInit {
             this.formComponent.form.value["password"]
           )
           .subscribe({
-            next: () => this.router.navigateByUrl("/pokemon"),
+            next: () => {
+              this.formComponent.onCompleteSignal.set(
+                "Password has been reset successfully"
+              );
+              setTimeout(() => this.router.navigateByUrl("/pokemon"), 1000);
+            },
             error: () =>
               this.formComponent.onErrorSignal.set(
                 "An error occurred please try again"

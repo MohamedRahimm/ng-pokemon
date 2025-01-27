@@ -1,3 +1,7 @@
+@if(errorSignal()){
+<h1>Page does not exist</h1>
+}
+@else{
 <main>
     <h1>{{pokemonData.name}}</h1>
     <div class="info-section">
@@ -22,3 +26,4 @@
         }
     </ul>
 </main>
+}
