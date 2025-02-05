@@ -1,10 +1,10 @@
-import { ApplicationConfig, provideZoneChangeDetection } from "@angular/core";
-import { provideRouter } from "@angular/router";
-import { appRoutes } from "./app.routes";
 import { provideHttpClient } from "@angular/common/http";
-import { provideFirebaseApp, initializeApp } from "@angular/fire/app";
-import { provideAuth, getAuth } from "@angular/fire/auth";
-import { environment } from "../environments/environment.development";
+import { ApplicationConfig, provideZoneChangeDetection } from "@angular/core";
+import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
+import { getAuth, provideAuth } from "@angular/fire/auth";
+import { provideRouter } from "@angular/router";
+import { environment } from "../environments/environment";
+import { appRoutes } from "./app.routes";
 
 export const appConfig: ApplicationConfig = {
   providers: [

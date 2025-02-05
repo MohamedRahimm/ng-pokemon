@@ -7,7 +7,7 @@
     <div>
         <a [routerLink]="data.url">
             <p>{{ data.pokemon.name }}</p>
-            <img [src]="data.pokemon.sprite" alt="idk" />
+            <img [src]="data.pokemon.sprite" alt="{{data.pokemon.name}}" />
         </a>
     </div>
     }
@@ -15,7 +15,7 @@
     <div>
         <a routerLink="/">
             <p>Charmander</p>
-            <img src="pokemon-placeholder.png" alt="idk" />
+            <img src="pokemon-placeholder.png" alt="Charmander" />
         </a>
     </div>
     }

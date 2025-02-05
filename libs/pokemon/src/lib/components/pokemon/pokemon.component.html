@@ -14,7 +14,7 @@
     <p>Sprites:</p>
     <div class="sprite-container">
         @for(sprite of pokemonData.sprites;track $index){
-        <img class="sprite" [src]="sprite" alt="Image of {{pokemonData.name}}" />
+        <img class="sprite" [src]="sprite" alt="{{pokemonData.name}}" />
         }
     </div>
     <p>

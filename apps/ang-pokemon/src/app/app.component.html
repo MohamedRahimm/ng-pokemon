@@ -6,6 +6,12 @@
         <div class="user-info">
             <span>Currently Signed in with: {{ authService.userEmail$ | async }}</span>
             <button (click)="logout()">logout</button>
+            @if(loading|async){
+            <span>...</span>
+            }
+            @if(onErrorSignal()){
+            <span>Logout failed please try again</span>
+            }
         </div>
     </div>
     <a class="github-link" href="https://github.com/MohamedRahimm/ng-pokemon" target="_blank" rel="noopener noreferrer">
